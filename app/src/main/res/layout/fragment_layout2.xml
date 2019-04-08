@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SingleViewActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:paddingTop="30dp" />
+
+            <Button
+                android:id="@+id/cartButton"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:background="#FF710389"
+                android:layout_marginTop="12dp"
+                android:text="@string/AddTo"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="12dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="وصف الكتاب:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:enabled="false"
+                android:textColor="@android:color/background_dark"/>
+
+            <Button
+                android:id="@+id/your_think"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="أبد رأيك"
+                android:background="#FF16BF0D"
+                android:textColor="@android:color/background_light"
+                android:layout_marginTop="15dp"
+                android:textSize="20sp" />
+            <Button
+                android:id="@+id/reader_think"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="آراء القراء"
+                android:background="#FF16BF0D"
+                android:textColor="@android:color/background_light"
+                android:layout_marginTop="15dp"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/sku"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="sku:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/isbn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="isbn:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/isbn13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="isbn13:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/pages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="pages:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="year:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/publisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="publisher:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="cover:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/series"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:text="series:"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

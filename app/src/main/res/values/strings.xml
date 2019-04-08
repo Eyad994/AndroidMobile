@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Jamalon</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Eyad Jaabo</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="AddTo">أضف إلى عربة التسوق</string>
+    <string name="estakshef">إستكشف</string>
+    <string name="title_activity_book_details">bookDetails</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">search</string>
+</resources>
