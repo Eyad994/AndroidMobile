@@ -1,4 +1,4 @@
-package com.jamalonexpress.fragmentwithnavigation;
+package com.jamalonexpress.fragmentwithnavigation.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.jamalonexpress.fragmentwithnavigation.AddorRemoveCallbacks;
+import com.jamalonexpress.fragmentwithnavigation.Book;
+import com.jamalonexpress.fragmentwithnavigation.MainActivity;
+import com.jamalonexpress.fragmentwithnavigation.R;
 import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,8 +65,8 @@ public class Fragment2 extends Fragment {
                             jsonObject = new JSONObject(response.toString()).getJSONObject("response");
                             JSONObject product = new JSONObject(jsonObject.toString()).getJSONObject("product_price");
                             Log.d("sad", "onResponse: "+ jsonObject);
-                            title.setText(x.sku);
-                           // title.setText(jsonObject.getString("title"));
+                           // title.setText(x.sku);
+                            title.setText(jsonObject.getString("title"));
                             author.setText("المؤلف: "+jsonObject.getString("author_name"));
                             Picasso.get().load(jsonObject.getString("main_image")).into(imageView);
                             price.setText("السعر: "+ product.getString("price")+ " ريال سعودي");
@@ -96,7 +100,7 @@ public class Fragment2 extends Fragment {
                     book.setSku(jsonObject.getString("sku"));
                     book.setAuthor(jsonObject.getString("author_name"));
                     book.setImage(jsonObject.getString("main_image"));
-                    ((AddorRemoveCallbacks)getContext()).onAddProduct(jsonObject.getString("sku"));
+                    ((AddorRemoveCallbacks)getContext()).onAddProduct(jsonObject.getString("sku"),jsonObject.getString("title"),jsonObject.getString("main_image"),jsonObject.getString("min_age"),jsonObject.getString("author_name"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

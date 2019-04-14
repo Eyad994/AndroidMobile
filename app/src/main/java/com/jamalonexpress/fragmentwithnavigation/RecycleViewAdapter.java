@@ -2,19 +2,20 @@ package com.jamalonexpress.fragmentwithnavigation;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.github.siyamed.shapeimageview.RoundedImageView;
+import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment2;
+
 import java.util.ArrayList;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
@@ -23,10 +24,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     private Context mContext;
     public ArrayList<String> mImageNames;
     public ArrayList<String> mImages;
-    private int incremant = 0;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
-
 
     public RecycleViewAdapter(Context mContext, ArrayList<String> mImageNames, ArrayList<String> mImages) {
         this.mContext = mContext;
@@ -37,7 +36,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Log.d(TAG, "onCreateViewHolder: ");
        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem,viewGroup,false);
        ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -45,7 +43,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        Log.d(TAG, "onBindViewHolder: ");
+
          if(i== 0){
              viewHolder.HeaderButton.setText("إعرض الكل");
              viewHolder.HeaderButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +62,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
              viewHolder.textView.setVisibility(View.GONE);
 
          } else if(i==5){
-             viewHolder.textView.setText("كتب جديدة       ");
+             viewHolder.textView.setText("كتب جديدة         ");
              viewHolder.HeaderButton.setVisibility(View.GONE);
         }else  {
             viewHolder.textView.setVisibility(View.GONE);
@@ -74,7 +72,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 .asBitmap()
                 .load(mImages.get(i))
                 .into(viewHolder.image);
-        viewHolder.imageName.setText(mImageNames.get(i));
+        viewHolder.imageName.setText(mImageNames.get(i) +" ريال سعودي");
 
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +80,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 Log.d(TAG,"onClick: clicked on:"+ mImageNames.get(i));
                 //Toast.makeText(mContext, mImageNames.get(i), Toast.LENGTH_SHORT).show();
                 ((MainActivity)mContext).onClicl(mImageNames.get(i));
-                ((MainActivity)mContext).setViewPager(1);
+                ((MainActivity)mContext).setViewPager(2);
+//                Fragment2 fragment2 = new Fragment2();
+//                ((MainActivity)mContext).changeFragment(fragment2);
 //                Intent intent = new Intent(mContext,SingleViewActivity.class);
 //                intent.putExtra("title",mImageNames.get(i));
 //                intent.putExtra("image",mImages.get(i));
@@ -124,11 +124,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     private boolean isPositionHeader(int position) {
         return position == 0;
-    }
-
-    private int position(){
-        incremant++;
-        return incremant;
     }
 
 }

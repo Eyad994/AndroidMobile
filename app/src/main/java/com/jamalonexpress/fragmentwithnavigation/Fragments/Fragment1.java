@@ -1,9 +1,11 @@
-package com.jamalonexpress.fragmentwithnavigation;
+package com.jamalonexpress.fragmentwithnavigation.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.jamalonexpress.fragmentwithnavigation.R;
+import com.jamalonexpress.fragmentwithnavigation.RecycleViewAdapter;
+import com.jamalonexpress.fragmentwithnavigation.shared;
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.ArrayList;
@@ -38,8 +43,8 @@ public class Fragment1 extends Fragment {
                         JSONArray jsonArray=null;
                         try {
                             jsonArray=new JSONArray(response.toString());
-                            for (int i=0;i<8;i++){
-                                mNames.add(jsonArray.getJSONObject(i).getString("employee_name"));
+                            for (int i=0;i<5;i++){
+                                mNames.add(jsonArray.getJSONObject(i).getString("employee_age"));
                                 mImagesUrls.add("https://cdn.jamalon.com/c/p/3070376.jpg");
                             }
                             RecyclerView recyclerView = view.findViewById(R.id.recyclerv_view);
@@ -63,9 +68,17 @@ public class Fragment1 extends Fragment {
     }
 
     @Override
+    public void onDestroy() {
+        this.mImagesUrls.clear();
+        this.mNames.clear();
+        Fragment1 fragment1 = new Fragment1();
+        super.onDestroy();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("---------------------", "onDestroyView: ");
+        Log.d(TAG, "onDestroyView: ");
         this.mImagesUrls.clear();
         this.mNames.clear();
     }

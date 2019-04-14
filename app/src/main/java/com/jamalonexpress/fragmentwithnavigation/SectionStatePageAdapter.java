@@ -20,6 +20,9 @@ public class SectionStatePageAdapter extends FragmentStatePagerAdapter {
         mfragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
+    public String getFragmentTitle(int i){
+        return mFragmentTitleList.get(i);
+    }
     @Override
     public Fragment getItem(int i) {
         return mfragmentList.get(i);

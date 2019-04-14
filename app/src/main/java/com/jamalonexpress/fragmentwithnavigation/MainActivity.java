@@ -4,8 +4,10 @@ import android.app.SearchManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -18,53 +20,65 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment1;
+import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment2;
+import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment3;
+import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment4;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,AddorRemoveCallbacks{
 
     public String sku;
+    public String jsonData;
     private static final String TAG = "MainActivity";
     private SectionStatePageAdapter mSectionStatePageAdapter;
     private ViewPager mViewPager;
-     ArrayList<Book> bookItems;
+    public ArrayList<Book> bookItems;
     private static int cart_count= 0;
-    SectionStatePageAdapter adapter = new SectionStatePageAdapter(getSupportFragmentManager());
-    SharedPreferences.Editor editor;
-    SharedPreferences prefs;
+    private final SectionStatePageAdapter adapter = new SectionStatePageAdapter(getSupportFragmentManager());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadData();
 
-        editor = getSharedPreferences("Test", MODE_PRIVATE).edit();
-        prefs = getSharedPreferences("Test", MODE_PRIVATE);
+        loadData();
 
         mSectionStatePageAdapter = new SectionStatePageAdapter(getSupportFragmentManager());
         mViewPager = findViewById(R.id.container);
 
         adapter.addFragment(new Fragment1(),"Fragment1");
+        adapter.addFragment(new Fragment4(),"Fragment4");
+       // mSectionStatePageAdapter.notifyDataSetChanged();
         mViewPager.setAdapter(adapter);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dehaze);
+//        for(Book b : bookItems){
+//                Log.d(TAG, "onForLoop: True "+b.getSku() + " "+sku);
+//        }
     }
     public void saveData(){
 
@@ -77,13 +91,13 @@ public class MainActivity extends AppCompatActivity
         editor.apply();
     }
 
-    private void loadData(){
+    public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences("cartItems",MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("cartItem",null);
+        jsonData = sharedPreferences.getString("cartItem",null);
         Type type = new TypeToken<ArrayList<Book>>() {}.getType();
-        bookItems = gson.fromJson(json,type);
-        Log.d(TAG, "loadData: "+ json);
+        bookItems = gson.fromJson(jsonData,type);
+        Log.d(TAG, "loadData: "+ jsonData);
         if(bookItems == null){
             bookItems = new ArrayList<>();
         }
@@ -92,7 +106,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -121,9 +135,12 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         MenuItem menuItem = menu.findItem(R.id.cart_action);
-        menuItem.setIcon(Converter.convertLayoutToImage(MainActivity.this,bookItems.size(),R.drawable.ic_shopping_cart_white_24dp));
+        menuItem.setIcon(Converter.convertLayoutToImage(MainActivity.this,bookItems.size(),R.drawable.ic_shopping_cart));
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.colorPrimary));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.colorPrimary));
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -137,8 +154,7 @@ public class MainActivity extends AppCompatActivity
 //                    mViewPager.setAdapter(adapter);
 //                    setViewPager(4);
 //                }
-                Toast.makeText(MainActivity.this, "onTextSubmit: "+query+" adapter: "+adapter.getCount(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(MainActivity.this, "onTextSubmit: "+query, Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -162,9 +178,9 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if(id == R.id.cart_action){
+            setViewPager(1);
            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -186,26 +202,31 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
     @Override
-    public void onAddProduct(String sku) {
-        cart_count++;
+    public void onAddProduct(String sku,String title,String image,String price,String author) {
         invalidateOptionsMenu();
-        Book book = new Book();
-        bookItems.add(new Book("123","www","asd","12","fdds","dss"));
+        bookItems.add(new Book(sku,title,image,"12","00",author));
         saveData();
-        Snackbar.make((CoordinatorLayout)findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
+        Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
     @Override
     public void onRemoveProduct() {
-        cart_count--;
         invalidateOptionsMenu();
-        Snackbar.make((CoordinatorLayout)findViewById(R.id.parentlayout), "Removed from cart !", Snackbar.LENGTH_LONG)
+        Snackbar.make(findViewById(R.id.parentlayout), "Removed from cart !", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+    }
+
+    public void changeFragment(final Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.parentlayout, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 }
