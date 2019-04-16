@@ -9,12 +9,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
+
     private ArrayList<Book> list = new ArrayList<Book>();
     private Context context;
 
@@ -51,30 +50,54 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         TextView listItemText = view.findViewById(R.id.list_item_string);
         ImageView imageView = view.findViewById(R.id.imageCart);
         final TextView qty = view.findViewById(R.id.quantity);
+        Button deleteBook = view.findViewById(R.id.delete_cart_book);
         TextView author = view.findViewById(R.id.cartAuthor);
-        Book book = list.get(position);
-        author.setText(book.getAuthor());
-        Picasso.get().load(book.getImage()).into(imageView);
-        listItemText.setText(book.getTitle());
-        //Handle buttons and add onClickListeners
-        Button deleteBtn = view.findViewById(R.id.delete_btn);
-        Button addBtn = view.findViewById(R.id.add_btn);
+        if(list.size()>0) {
 
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //do something
-               // list.remove(position); //or some other task
-            }
-        });
-        addBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                qty.setText("2");
-                notifyDataSetChanged();
-            }
-        });
+            final Book book = list.get(position);
 
+            author.setText(book.getAuthor());
+            Picasso.get().load(book.getImage()).into(imageView);
+            listItemText.setText(book.getTitle());
+            qty.setText(Integer.toString(book.getQty()));
+            //Handle buttons and add onClickListeners
+            Button deleteBtn = view.findViewById(R.id.delete_btn);
+            Button addBtn = view.findViewById(R.id.add_btn);
+
+            deleteBook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MainActivity)context).onRemoveProduct(position);
+                    list.remove(position);
+                    ((MainActivity)context).saveData();
+                    notifyDataSetChanged();
+                }
+            });
+
+            deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int x = book.getQty();
+                    if(x > 1 && x <= 5){
+                        x--;
+                        book.setQty(x);
+                        qty.setText(Integer.toString(book.getQty()));
+                    }
+                }
+            });
+            addBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int x = book.getQty();
+                    if(x >= 1 && x < 5) {
+                        x++;
+                        book.setQty(x);
+                        qty.setText(Integer.toString(book.getQty()));
+                        //notifyDataSetChanged();
+                    }
+                }
+            });
+        }
         return view;
     }
 }

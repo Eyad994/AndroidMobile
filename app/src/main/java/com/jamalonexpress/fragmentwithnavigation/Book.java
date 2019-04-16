@@ -6,7 +6,16 @@ public class Book {
     private String title;
     private String image;
     private String price;
-    private String qty;
+    private int qty = 1;
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
     private String author;
 
     public Book() {
@@ -26,10 +35,6 @@ public class Book {
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public void setQty(String qty) {
-        this.qty = qty;
     }
 
     public void setAuthor(String author) {
@@ -52,20 +57,16 @@ public class Book {
         return price;
     }
 
-    public String getQty() {
-        return qty;
-    }
-
     public String getAuthor() {
         return author;
     }
 
-    public Book(String sku, String title, String image, String price, String qty, String author) {
+    public Book(String sku, String title, String image, String price, int qty, String author) {
         this.sku = sku;
         this.title = title;
         this.image = image;
         this.price = price;
-        this.qty = qty;
+        this.qty = this.qty;
         this.author = author;
     }
 }

@@ -77,7 +77,7 @@ public class Fragment2 extends Fragment {
                             pages.setText("عدد الصفحات: "+jsonObject.getString("pages"));
                             year.setText("سنة النشر: "+jsonObject.getString("publish_date"));
                             publisher.setText("دار النشر: "+jsonObject.getString("publisher_name"));
-                            cover.setText("غﻻف الكتاب: "+jsonObject.getString("cover_type"));
+                            cover.setText("غلاف الكتاب: "+jsonObject.getString("cover_type"));
                             series.setText("ترتيب الكتاب في السلسة: "+"غير متوفر");
 
                         } catch (JSONException e) {
@@ -100,7 +100,7 @@ public class Fragment2 extends Fragment {
                     book.setSku(jsonObject.getString("sku"));
                     book.setAuthor(jsonObject.getString("author_name"));
                     book.setImage(jsonObject.getString("main_image"));
-                    ((AddorRemoveCallbacks)getContext()).onAddProduct(jsonObject.getString("sku"),jsonObject.getString("title"),jsonObject.getString("main_image"),jsonObject.getString("min_age"),jsonObject.getString("author_name"));
+                    ((AddorRemoveCallbacks)getContext()).onAddProduct(jsonObject.getString("sku"),jsonObject.getString("title"),jsonObject.getString("main_image"),jsonObject.getString("min_age"),1,jsonObject.getString("author_name"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

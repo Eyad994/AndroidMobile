@@ -3,7 +3,6 @@ package com.jamalonexpress.fragmentwithnavigation;
 import android.app.SearchManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -30,8 +29,13 @@ import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment2;
 import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment3;
 import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment4;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,AddorRemoveCallbacks{
@@ -212,16 +216,28 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
     @Override
-    public void onAddProduct(String sku,String title,String image,String price,String author) {
+    public void onAddProduct(String sku,String title,String image,String price,int qty,String author) {
         invalidateOptionsMenu();
-        bookItems.add(new Book(sku,title,image,"12","00",author));
+        int x;
+//        for (Book b: bookItems)
+//        {
+//            if(b.getSku().equals(sku)){
+//                x = b.getQty();
+//                x++;
+//                b.setQty(x);
+//                Toast.makeText(this, ""+x, Toast.LENGTH_SHORT).show();
+//            }
+//        }
+
+        bookItems.add(new Book(sku,title,image,"12",qty,author));
         saveData();
         Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
     @Override
-    public void onRemoveProduct() {
+    public void onRemoveProduct(int position) {
         invalidateOptionsMenu();
+        bookItems.remove(position);
         Snackbar.make(findViewById(R.id.parentlayout), "Removed from cart !", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
