@@ -1,8 +1,6 @@
 package com.jamalonexpress.fragmentwithnavigation;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -80,9 +78,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 Log.d(TAG,"onClick: clicked on:"+ mImageNames.get(i));
                 //Toast.makeText(mContext, mImageNames.get(i), Toast.LENGTH_SHORT).show();
                 ((MainActivity)mContext).onClicl(mImageNames.get(i));
-                ((MainActivity)mContext).setViewPager(2);
-//                Fragment2 fragment2 = new Fragment2();
-//                ((MainActivity)mContext).changeFragment(fragment2);
+               // ((MainActivity)mContext).setViewPager(2);
+                Fragment2 fragment2 = new Fragment2();
+                ((MainActivity)mContext).changeFragment(fragment2);
 //                Intent intent = new Intent(mContext,SingleViewActivity.class);
 //                intent.putExtra("title",mImageNames.get(i));
 //                intent.putExtra("image",mImages.get(i));

@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
@@ -45,8 +49,13 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         }
         //Handle TextView and display string from your list
         TextView listItemText = view.findViewById(R.id.list_item_string);
+        ImageView imageView = view.findViewById(R.id.imageCart);
+        final TextView qty = view.findViewById(R.id.quantity);
+        TextView author = view.findViewById(R.id.cartAuthor);
         Book book = list.get(position);
-        listItemText.setText(book.getTitle()+ "\n \n"+ book.getAuthor());
+        author.setText(book.getAuthor());
+        Picasso.get().load(book.getImage()).into(imageView);
+        listItemText.setText(book.getTitle());
         //Handle buttons and add onClickListeners
         Button deleteBtn = view.findViewById(R.id.delete_btn);
         Button addBtn = view.findViewById(R.id.add_btn);
@@ -55,14 +64,13 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 //do something
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
+               // list.remove(position); //or some other task
             }
         });
         addBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
+                qty.setText("2");
                 notifyDataSetChanged();
             }
         });

@@ -3,6 +3,7 @@ package com.jamalonexpress.fragmentwithnavigation;
 import android.app.SearchManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -52,13 +53,15 @@ public class MainActivity extends AppCompatActivity
 
         loadData();
 
-        mSectionStatePageAdapter = new SectionStatePageAdapter(getSupportFragmentManager());
-        mViewPager = findViewById(R.id.container);
-
-        adapter.addFragment(new Fragment1(),"Fragment1");
-        adapter.addFragment(new Fragment4(),"Fragment4");
-       // mSectionStatePageAdapter.notifyDataSetChanged();
-        mViewPager.setAdapter(adapter);
+//        mSectionStatePageAdapter = new SectionStatePageAdapter(getSupportFragmentManager());
+//        mViewPager = findViewById(R.id.container);
+//
+//        adapter.addFragment(new Fragment1(),"Fragment1");
+//        adapter.addFragment(new Fragment4(),"Fragment4");
+        Fragment1 fragment1 = new Fragment1();
+        changeFragment(fragment1);
+//       // mSectionStatePageAdapter.notifyDataSetChanged();
+//        mViewPager.setAdapter(adapter);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity
 
     public void onClicl(String sku){
         this.sku = sku;
-        setupViewPager(mViewPager);
+//        setupViewPager(mViewPager);
     }
 
     public void setViewPager(int fragmentNumber){
@@ -178,7 +181,8 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if(id == R.id.cart_action){
-            setViewPager(1);
+            Fragment4 fragment4 = new Fragment4();
+            changeFragment(fragment4);
            return true;
         }
         return super.onOptionsItemSelected(item);
@@ -191,7 +195,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            setViewPager(0);
+            Fragment1 fragment1 = new Fragment1();
+            changeFragment(fragment1);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -222,11 +227,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void changeFragment(final Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.parentlayout, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
 
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.parentlayout, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+    }
 }

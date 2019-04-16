@@ -5,42 +5,82 @@
     android:layout_height="match_parent"
     android:layout_marginTop="30dp">
 
-
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"/>
-
     <TextView
-        android:layout_marginTop="30dp"
         android:id="@+id/list_item_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layoutDirection="ltr"
-        android:textDirection="ltr"
-        android:paddingLeft="8dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_alignParentTop="true"
+        android:textSize="18dp"
+        android:layout_marginLeft="130dp"
+        android:text="Book Title"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/delete_btn"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
-        android:text="-" />
+    <ImageView
+        android:id="@+id/imageCart"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_launcher_background"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/add_btn"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/delete_btn"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:text="+" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/arrow_top"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textColor="#0099CC" />
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="42dp"
+        android:text="1"
+        android:textColor="@android:color/background_dark"
+        android:layout_marginLeft="45dp"/>
 
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_btn"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/arrow_bottom"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textColor="#0099CC" />
+    <TextView
+        android:id="@+id/cartAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/list_item_string"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="5dp"
+        android:text="Author" />
+    <TextView
+        android:id="@+id/cartPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/cartAuthor"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="15dp"
+        android:text="15 ريال سعودي" />
 </RelativeLayout>

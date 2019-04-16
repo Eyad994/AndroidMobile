@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.jamalonexpress.fragmentwithnavigation.Book;
@@ -27,6 +29,18 @@ public class Fragment4 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout4,container,false);
+        Button button_plus = view.findViewById(R.id.add_btn);
+        Button button_minus = view.findViewById(R.id.delete_btn);
+        ImageView imageView = view.findViewById(R.id.imageCart);
+        TextView textView = view.findViewById(R.id.cartPrice);
+        TextView qty = view.findViewById(R.id.quantity);
+        TextView author = view.findViewById(R.id.cartAuthor);
+        author.setVisibility(View.GONE);
+        qty.setVisibility(View.GONE);
+        imageView.setVisibility(View.GONE);
+        textView.setVisibility(View.GONE);
+        button_minus.setVisibility(View.GONE);
+        button_plus.setVisibility(View.GONE);
 
         ArrayList<Book> list = new ArrayList<Book>();
         for (Book b : ((MainActivity)getContext()).bookItems){
@@ -34,26 +48,16 @@ public class Fragment4 extends Fragment {
         }
        // list.add(new Book("192929","ExampleBook1","123","21sa","sa","dd"));
 
-        //instantiate custom adapter
         MyCustomAdapter adapter = new MyCustomAdapter(list, getContext());
 
-        //handle listview and assign adapter
         ListView lView = (ListView)view.findViewById(R.id.listview);
         lView.setAdapter(adapter);
 
-        try {
-            JSONArray jsonArray = new JSONArray(((MainActivity)getContext()).jsonData);
-           // Toast.makeText(getContext(), ""+jsonArray.getString(0), Toast.LENGTH_SHORT).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         for (Book b : ((MainActivity)getContext()).bookItems)
         {
             //Toast.makeText(getContext(), ""+b.getSku(), Toast.LENGTH_SHORT).show();
             count++;
         }
-       // Toast.makeText(getContext(), "Counter: "+ count, Toast.LENGTH_SHORT).show();
-       // Toast.makeText(getContext(), ""+((MainActivity)getContext()).jsonData, Toast.LENGTH_SHORT).show();
         return view;
     }
 }
