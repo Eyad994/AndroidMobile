@@ -1,6 +1,7 @@
 package com.jamalonexpress.fragmentwithnavigation;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jamalonexpress.fragmentwithnavigation.Models.Book;
 import com.squareup.picasso.Picasso;
@@ -18,7 +20,7 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
 
     private ArrayList<Book> list;
     private Context context;
-
+    private static final String TAG = "MyCustomAdapter";
 
 
     public MyCustomAdapter(ArrayList<Book> list, Context context) {
@@ -83,6 +85,8 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
                     if(x > 1 && x <= 5){
                         x--;
                         book.setQty(x);
+                        ((MainActivity)context).bookItems.get(position).setQty(x);
+                        ((MainActivity)context).saveData();
                         qty.setText(Integer.toString(book.getQty()));
                     }
                 }
@@ -90,10 +94,13 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
             addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     int x = book.getQty();
                     if(x >= 1 && x < 5) {
                         x++;
-                        book.setQty(x);
+                       book.setQty(x);
+                        ((MainActivity)context).bookItems.get(position).setQty(x);
+                        ((MainActivity)context).saveData();
                         qty.setText(Integer.toString(book.getQty()));
                         //notifyDataSetChanged();
                     }

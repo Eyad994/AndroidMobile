@@ -6,7 +6,7 @@ public class Book {
     private String title;
     private String image;
     private String price;
-    private int qty = 1;
+    private int qty;
 
     public int getQty() {
         return qty;
@@ -66,7 +66,7 @@ public class Book {
         this.title = title;
         this.image = image;
         this.price = price;
-        this.qty = this.qty;
+        this.qty = qty;
         this.author = author;
     }
 }

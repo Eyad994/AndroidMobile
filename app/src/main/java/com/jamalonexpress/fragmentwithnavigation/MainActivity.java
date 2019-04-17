@@ -216,21 +216,35 @@ public class MainActivity extends AppCompatActivity
     public void onAddProduct(String sku,String title,String image,String price,int qty,String author) {
         invalidateOptionsMenu();
 
-//        int x;
-//        for (Book b: bookItems)
-//        {
-//            if(b.getSku().equals(sku)){
-//                x = b.getQty();
-//                x++;
-//                b.setQty(x);
-//                Toast.makeText(this, ""+b.getQty(), Toast.LENGTH_SHORT).show();
-//            }
-//        }
+        int x;
+        if(!bookItems.isEmpty()){
+            for (Book b: bookItems)
+            {
+                if(b.getSku().equals(sku)){
+                    x = b.getQty();
+                    x++;
+                    if(x<=5){
+                        b.setQty(x);
+                        Snackbar.make(findViewById(R.id.parentlayout), "Quantity: "+x, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }else{
+                        Toast.makeText(this, "You cant add more than 5", Toast.LENGTH_SHORT).show();
+                    }
+                    saveData();
+                }else {
+                    bookItems.add(new Book(sku,title,image,"12",qty,author));
+                    saveData();
+                    Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        }else {
+            bookItems.add(new Book(sku,title,image,"12",qty,author));
+            saveData();
+            Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
 
-        bookItems.add(new Book(sku,title,image,"12",qty,author));
-        saveData();
-        Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
     }
 
     @Override

@@ -45,12 +45,14 @@
         android:id="@+id/quantity"
         android:layout_width="23dp"
         android:layout_height="20dp"
+        android:background="@drawable/border_textview"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="42dp"
+        android:gravity="center"
         android:text="1"
         android:textColor="@android:color/background_dark"
-        android:layout_marginLeft="45dp"/>
+        android:layout_marginRight="8dp"/>
 
     <Button
         android:id="@+id/delete_btn"
