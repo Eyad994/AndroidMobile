@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment2;
+import com.jamalonexpress.fragmentwithnavigation.Fragments.ListFragment;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
              viewHolder.HeaderButton.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
-                     Toast.makeText(mContext, "Display All", Toast.LENGTH_SHORT).show();
+                     ListFragment listFragment = new ListFragment();
+                     ((MainActivity)mContext).changeFragment(listFragment);
                  }
              });
              viewHolder.textView.setVisibility(View.GONE);

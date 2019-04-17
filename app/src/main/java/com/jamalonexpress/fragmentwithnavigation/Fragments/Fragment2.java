@@ -19,7 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.jamalonexpress.fragmentwithnavigation.AddorRemoveCallbacks;
-import com.jamalonexpress.fragmentwithnavigation.Book;
+import com.jamalonexpress.fragmentwithnavigation.Models.Book;
 import com.jamalonexpress.fragmentwithnavigation.MainActivity;
 import com.jamalonexpress.fragmentwithnavigation.R;
 import com.squareup.picasso.Picasso;
@@ -100,6 +100,7 @@ public class Fragment2 extends Fragment {
                     book.setSku(jsonObject.getString("sku"));
                     book.setAuthor(jsonObject.getString("author_name"));
                     book.setImage(jsonObject.getString("main_image"));
+                    book.setQty(1);
                     ((AddorRemoveCallbacks)getContext()).onAddProduct(jsonObject.getString("sku"),jsonObject.getString("title"),jsonObject.getString("main_image"),jsonObject.getString("min_age"),1,jsonObject.getString("author_name"));
                 } catch (JSONException e) {
                     e.printStackTrace();

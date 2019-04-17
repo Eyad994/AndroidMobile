@@ -1,4 +1,4 @@
-package com.jamalonexpress.fragmentwithnavigation;
+package com.jamalonexpress.fragmentwithnavigation.Models;
 
 public class Book {
 

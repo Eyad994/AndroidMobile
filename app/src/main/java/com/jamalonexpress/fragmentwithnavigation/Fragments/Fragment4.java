@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.jamalonexpress.fragmentwithnavigation.Book;
+import com.jamalonexpress.fragmentwithnavigation.Models.Book;
 import com.jamalonexpress.fragmentwithnavigation.MainActivity;
 import com.jamalonexpress.fragmentwithnavigation.MyCustomAdapter;
 import com.jamalonexpress.fragmentwithnavigation.R;
@@ -22,6 +20,8 @@ import java.util.ArrayList;
 public class Fragment4 extends Fragment {
     private static final String TAG = "Fragment4";
     int count =0;
+    ArrayList<Book> list = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,22 +41,21 @@ public class Fragment4 extends Fragment {
         button_minus.setVisibility(View.GONE);
         button_plus.setVisibility(View.GONE);
 
-        ArrayList<Book> list = new ArrayList<>();
         for (Book b : ((MainActivity)getContext()).bookItems){
             list.add(new Book(b.getSku(),b.getTitle(),b.getImage(),b.getPrice(),b.getQty(),b.getAuthor()));
         }
-       // list.add(new Book("192929","ExampleBook1","123","21sa","sa","dd"));
 
+       // list.add(new Book("192929","ExampleBook1","123","21sa","sa","dd"));
         MyCustomAdapter adapter = new MyCustomAdapter(list, getContext());
 
-        ListView lView = (ListView)view.findViewById(R.id.listview);
+        ListView lView = view.findViewById(R.id.listview);
         lView.setAdapter(adapter);
 
-        for (Book b : ((MainActivity)getContext()).bookItems)
-        {
-           // Toast.makeText(getContext(), ""+b.getQty(), Toast.LENGTH_SHORT).show();
-            count++;
-        }
+//        for (Book b : ((MainActivity)getContext()).bookItems)
+//        {
+//           // Toast.makeText(getContext(), ""+b.getQty(), Toast.LENGTH_SHORT).show();
+//            count++;
+//        }
         return view;
     }
 }

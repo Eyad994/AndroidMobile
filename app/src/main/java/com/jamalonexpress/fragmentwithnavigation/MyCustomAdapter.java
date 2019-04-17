@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.jamalonexpress.fragmentwithnavigation.Models.Book;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
 
-    private ArrayList<Book> list = new ArrayList<Book>();
+    private ArrayList<Book> list;
     private Context context;
 
 
@@ -52,10 +54,10 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         final TextView qty = view.findViewById(R.id.quantity);
         Button deleteBook = view.findViewById(R.id.delete_cart_book);
         TextView author = view.findViewById(R.id.cartAuthor);
+
         if(list.size()>0) {
 
             final Book book = list.get(position);
-
             author.setText(book.getAuthor());
             Picasso.get().load(book.getImage()).into(imageView);
             listItemText.setText(book.getTitle());

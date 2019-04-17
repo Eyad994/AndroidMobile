@@ -28,14 +28,10 @@ import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment1;
 import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment2;
 import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment3;
 import com.jamalonexpress.fragmentwithnavigation.Fragments.Fragment4;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.jamalonexpress.fragmentwithnavigation.Models.Book;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,AddorRemoveCallbacks{
@@ -215,17 +211,19 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     public void onAddProduct(String sku,String title,String image,String price,int qty,String author) {
         invalidateOptionsMenu();
-        int x;
+
+//        int x;
 //        for (Book b: bookItems)
 //        {
 //            if(b.getSku().equals(sku)){
 //                x = b.getQty();
 //                x++;
 //                b.setQty(x);
-//                Toast.makeText(this, ""+x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, ""+b.getQty(), Toast.LENGTH_SHORT).show();
 //            }
 //        }
 
@@ -234,6 +232,7 @@ public class MainActivity extends AppCompatActivity
         Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
+
     @Override
     public void onRemoveProduct(int position) {
         invalidateOptionsMenu();

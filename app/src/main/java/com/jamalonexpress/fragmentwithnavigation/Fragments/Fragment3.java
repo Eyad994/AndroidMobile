@@ -22,8 +22,8 @@ public class Fragment3 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout3,container,false);
-        WebView browser = (WebView) view.findViewById(R.id.webview);
-        browser.loadUrl("https://express.jamalon.com/checkout/cart/");
+//        WebView browser = (WebView) view.findViewById(R.id.webview);
+//        browser.loadUrl("https://express.jamalon.com/checkout/cart/");
         return view;
     }
 }
