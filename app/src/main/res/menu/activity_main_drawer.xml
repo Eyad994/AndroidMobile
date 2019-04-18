@@ -34,5 +34,21 @@
                 android:title="طلباتي" />
         </menu>
     </item>
+    <item android:title="تفاعل معنا">
+        <menu>
+            <item
+                android:id="@+id/about_us"
+                android:icon="@drawable/ic_about_us"
+                android:title="عن جملون" />
+            <item
+                android:id="@+id/contact_us"
+                android:icon="@drawable/ic_contact_us"
+                android:title="تواصل معنا" />
+            <item
+                android:id="@+id/quastions"
+                android:icon="@drawable/ic_question_answer"
+                android:title="الأسئلة المتكررة" />
+        </menu>
+    </item>
 
 </menu>

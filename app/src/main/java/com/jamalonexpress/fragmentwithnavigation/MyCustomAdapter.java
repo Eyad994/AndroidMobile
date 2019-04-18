@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.jamalonexpress.fragmentwithnavigation.Models.Book;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
@@ -56,6 +54,7 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         final TextView qty = view.findViewById(R.id.quantity);
         Button deleteBook = view.findViewById(R.id.delete_cart_book);
         TextView author = view.findViewById(R.id.cartAuthor);
+        final TextView price = view.findViewById(R.id.cartPrice);
 
         if(list.size()>0) {
 
@@ -64,6 +63,8 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
             Picasso.get().load(book.getImage()).into(imageView);
             listItemText.setText(book.getTitle());
             qty.setText(Integer.toString(book.getQty()));
+            price.setText(Integer.toString(Integer.parseInt(book.getPrice()))+" ريال سعودي");
+
             //Handle buttons and add onClickListeners
             Button deleteBtn = view.findViewById(R.id.delete_btn);
             Button addBtn = view.findViewById(R.id.add_btn);
@@ -94,6 +95,15 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
             addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    if(book.getQty() > 1){
+//                        int x = book.getQty();
+//                        int pri = Integer.parseInt(book.getPrice());
+//                        int w = x * pri;
+//                        price.setText(Integer.toString(w));
+//                        notifyDataSetChanged();
+//                    }else{
+//                        price.setText(Integer.toString(Integer.parseInt(book.getPrice())));
+//                    }
 
                     int x = book.getQty();
                     if(x >= 1 && x < 5) {

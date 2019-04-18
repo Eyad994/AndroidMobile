@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.jamalonexpress.fragmentwithnavigation.Models.Book;
 import com.jamalonexpress.fragmentwithnavigation.MainActivity;
 import com.jamalonexpress.fragmentwithnavigation.MyCustomAdapter;
@@ -42,6 +45,7 @@ public class Fragment4 extends Fragment {
         button_minus.setVisibility(View.GONE);
         button_plus.setVisibility(View.GONE);
 
+
         for (Book b : ((MainActivity)getContext()).bookItems){
             Log.d(TAG, "QTY: "+b.getQty());
             list.add(new Book(b.getSku(),b.getTitle(),b.getImage(),b.getPrice(),b.getQty(),b.getAuthor()));
@@ -49,9 +53,28 @@ public class Fragment4 extends Fragment {
 
        // list.add(new Book("192929","ExampleBook1","123","21sa","sa","dd"));
         MyCustomAdapter adapter = new MyCustomAdapter(list, getContext());
-
         ListView lView = view.findViewById(R.id.listview);
+        ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.cart_list_footer,lView,false);
+        lView.addFooterView(footer,null,false);
         lView.setAdapter(adapter);
+
+        TextView total = view.findViewById(R.id.total_price);
+
+        int x = 0;
+        for (Book book: ((MainActivity)getContext()).bookItems){
+            x += Integer.parseInt(book.getPrice());
+        }
+        total.setText("المجموع الفرعي ("+list.size()+"),"+" "+x+" ريال سعودي");
+
+        Button button = view.findViewById(R.id.checkout_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                PlaceOrder placeOrder = new PlaceOrder();
+//                ((MainActivity)getContext()).changeFragment(placeOrder);
+                Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 //        for (Book b : ((MainActivity)getContext()).bookItems)
 //        {
