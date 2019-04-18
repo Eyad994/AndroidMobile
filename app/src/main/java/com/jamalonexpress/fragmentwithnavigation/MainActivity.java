@@ -2,6 +2,7 @@ package com.jamalonexpress.fragmentwithnavigation;
 
 import android.app.SearchManager;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -20,7 +21,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -171,10 +174,7 @@ public class MainActivity extends AppCompatActivity
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        Log.d(TAG, "onOptionsItemSelected: created");
+
         int id = item.getItemId();
 
         if (id == R.id.action_search) {
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity
     @NonNull
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
@@ -216,16 +216,16 @@ public class MainActivity extends AppCompatActivity
     public void onAddProduct(String sku,String title,String image,String price,int qty,String author) {
         invalidateOptionsMenu();
 
-        int x;
+        int counter;
         if(!bookItems.isEmpty()){
-            for (Book b: bookItems)
+            for (Book book: bookItems)
             {
-                if(b.getSku().equals(sku)){
-                    x = b.getQty();
-                    x++;
-                    if(x<=5){
-                        b.setQty(x);
-                        Snackbar.make(findViewById(R.id.parentlayout), "Quantity: "+x, Snackbar.LENGTH_LONG)
+                if(book.getSku().equals(sku)){
+                    counter = book.getQty();
+                    counter++;
+                    if(counter<=5){
+                        book.setQty(counter);
+                        Snackbar.make(findViewById(R.id.parentlayout), "Quantity: "+counter, Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }else{
                         Toast.makeText(this, "You cant add more than 5", Toast.LENGTH_SHORT).show();
@@ -241,8 +241,14 @@ public class MainActivity extends AppCompatActivity
         }else {
             bookItems.add(new Book(sku,title,image,"12",qty,author));
             saveData();
-            Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+
+             Snackbar snackbar = Snackbar.make(findViewById(R.id.parentlayout), "Added to cart successfully", Snackbar.LENGTH_LONG);
+             snackbar.setAction("Action", null).show();
+            View snakbarView = snackbar.getView();
+            TextView textView = snakbarView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.BLACK);
+            snakbarView.setBackgroundColor(Color.parseColor("#32cd32"));
+            snackbar.show();
         }
 
     }
@@ -251,8 +257,13 @@ public class MainActivity extends AppCompatActivity
     public void onRemoveProduct(int position) {
         invalidateOptionsMenu();
         bookItems.remove(position);
-        Snackbar.make(findViewById(R.id.parentlayout), "Removed from cart !", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.parentlayout), "Removed from cart !", Snackbar.LENGTH_LONG);
+                snackbar.setAction("Action", null).show();
+                View snakbarView = snackbar.getView();
+                TextView textView = snakbarView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(Color.BLACK);
+                snakbarView.setBackgroundColor(Color.RED);
+                snackbar.show();
     }
 
     public void changeFragment(final Fragment fragment){
